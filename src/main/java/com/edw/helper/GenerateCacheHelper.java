@@ -75,12 +75,12 @@ public class GenerateCacheHelper {
                         Boolean success = cache.replaceWithVersion(listOfUuid.get(i), newValue, metadataValue.getVersion());
 
                         if (success) {
-                            logger.info("success processing {} for {}",
+                            logger.info("success processing {} for {} ms",
                                     listOfUuid.get(i),
                                     System.currentTimeMillis() - timestamp);
                             break;
                         } else {
-                            logger.info("+++ retrying {} for {}",
+                            logger.info("+++ retrying {} for {} ms",
                                     listOfUuid.get(i),
                                     System.currentTimeMillis() - timestamp);
                         }
@@ -97,7 +97,7 @@ public class GenerateCacheHelper {
             ex.printStackTrace();
         }
 
-        logger.info("done ==================== for {}",
+        logger.info("done ==================== for {} ms",
                 System.currentTimeMillis() - startingTime);
     }
 }
