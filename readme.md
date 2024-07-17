@@ -20,10 +20,10 @@ $ java -Xmx4G -Xms4G -XX:+UseShenandoahGC -jar target/infinispan-14-replace-with
 
 ## Custom Controller
 
-Testing with 1000 numUpdateRequest and 1 maxProcess
+Testing with 1 maxProcess and 1000 numUpdateRequest 
 
 ```
-$ curl -kv http://127.0.0.1:8080/replace-with-version/v.1
+$ curl -kv http://127.0.0.1:8080/replace-with-version/v.1?maxProcess=1&numUpdateRequest=1000
 *   Trying 127.0.0.1:8080...
 * Connected to 127.0.0.1 (127.0.0.1) port 8080
 > GET /replace-with-version/v.1 HTTP/1.1
@@ -40,9 +40,9 @@ $ curl -kv http://127.0.0.1:8080/replace-with-version/v.1
 Method:replaceWithVersion, Thread: 1, Total Row: 1000, elapsed time: 1437ms, TPS: 695.8942
 ```
 
-Testing with 1000 numUpdateRequest and 2 maxProcess
+Testing with 2 maxProcess and 1000 numUpdateRequest 
 ```
-$ curl -kv http://127.0.0.1:8080/replace-with-version/v.1
+$ curl -kv http://127.0.0.1:8080/replace-with-version/v.1?maxProcess=2&numUpdateRequest=1000
 *   Trying 127.0.0.1:8080...
 * Connected to 127.0.0.1 (127.0.0.1) port 8080
 > GET /replace-with-version/v.1 HTTP/1.1
@@ -60,9 +60,9 @@ Method:replaceWithVersion, Thread: 2, Total Row: 1000, elapsed time: 2017ms, TPS
 ```
 
 
-Testing with 1000 numUpdateRequest and 5 maxProcess
+Testing with 5 maxProcess and 1000 numUpdateRequest
 ```
-$ curl -kv http://127.0.0.1:8080/replace-with-version/v.1
+$ curl -kv http://127.0.0.1:8080/replace-with-version/v.1?maxProcess=5&numUpdateRequest=1000
 *   Trying 127.0.0.1:8080...
 * Connected to 127.0.0.1 (127.0.0.1) port 8080
 > GET /replace-with-version/v.1 HTTP/1.1
@@ -80,4 +80,16 @@ Method:replaceWithVersion, Thread: 5, Total Row: 1000, elapsed time: 3635ms, TPS
 ```
 
 ## Conclusion
+
+| cycle | Thread Num | Data | TPS      |
+|-------|------------|------|----------|
+| 1     | 1          | 1000 | 1650.1650|
+| 2     | 1          | 1000 | 1328.0212|
+| 3     | 2          | 1000 | 534.1880 |
+| 4     | 2          | 1000 | 594.5303 |
+| 5     | 5          | 1000 | 425.7131 |
+| 6     | 5          | 1000 | 537.0569 |
+| 7     | 10         | 1000 | 279.4077 |
+| 8     | 10         | 1000 | 304.6923 |
+
 Increasing number of threads, gives a negative impact to `replace-with-version` TPS. 
