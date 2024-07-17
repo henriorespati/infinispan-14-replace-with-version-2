@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.math.BigDecimal;
@@ -34,10 +35,8 @@ public class MyCustomController {
     private RemoteCacheManager cacheManager;
 
     @GetMapping("/replace-with-version/v.1")
-    public String replaceWithVersion2() {
-
-        Integer numUpdateRequest = 1000;
-        Integer maxProcess = 1;
+    public String replaceWithVersion2(@RequestParam(defaultValue = "1", required = false) Integer maxProcess,
+                                      @RequestParam(defaultValue = "1000", required = false) Integer numUpdateRequest) {
 
         final RemoteCache cache = cacheManager.getCache("balance");
 
