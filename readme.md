@@ -12,3 +12,25 @@
 10-07-2024 16:31:36 [pool-1-thread-1] INFO  com.edw.helper.GenerateCacheHelper.lambda$generate$0 - success processing c1e4263e-7e83-40cb-b030-0924e3ed3df2 for 0
 10-07-2024 16:31:36 [http-nio-8080-exec-1] INFO  com.edw.helper.GenerateCacheHelper.generate - done ==================== for 35766
 ```
+
+## Custom Controller
+
+Testing with 1000 numUpdateRequest and 1 maxProcess
+
+```
+$ curl -kv http://127.0.0.1:8080/replace-with-version/v.1
+*   Trying 127.0.0.1:8080...
+* Connected to 127.0.0.1 (127.0.0.1) port 8080
+> GET /replace-with-version/v.1 HTTP/1.1
+> Host: 127.0.0.1:8080
+> User-Agent: curl/8.6.0
+> Accept: */*
+>
+< HTTP/1.1 200
+< Content-Type: text/plain;charset=UTF-8
+< Content-Length: 90
+< Date: Wed, 17 Jul 2024 04:22:58 GMT
+<
+* Connection #0 to host 127.0.0.1 left intact
+Method:replaceWithVersion, Thread: 1, Total Row: 1000, elapsed time: 1437ms, TPS: 695.8942
+```
