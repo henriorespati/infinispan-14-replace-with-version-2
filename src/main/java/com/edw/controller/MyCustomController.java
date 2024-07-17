@@ -14,6 +14,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.UUID;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -43,7 +44,7 @@ public class MyCustomController {
         ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(maxProcess);
         try {
             Random random = new Random();
-            String account = "84c9e71f-eedb-4ed1-905a-d33c2cefc789"; // this is your account number
+            String account = UUID.randomUUID().toString(); // this is your account number
             long startTime = System.currentTimeMillis();
             List<Future<?>> futures = new ArrayList<>();
             for (int i = 0; i < numUpdateRequest; i++) {
