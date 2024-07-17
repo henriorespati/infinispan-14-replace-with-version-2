@@ -71,7 +71,7 @@ public class GenerateCacheHelper {
                         }
 
                         BigDecimal newValue =
-                                ((BigDecimal) metadataValue.getValue()).add(new BigDecimal(1000));
+                                new BigDecimal((String) metadataValue.getValue()).add(new BigDecimal(1000));
                         Boolean success = cache.replaceWithVersion(listOfUuid.get(i), newValue, metadataValue.getVersion());
 
                         if (success) {
