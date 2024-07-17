@@ -39,3 +39,45 @@ $ curl -kv http://127.0.0.1:8080/replace-with-version/v.1
 * Connection #0 to host 127.0.0.1 left intact
 Method:replaceWithVersion, Thread: 1, Total Row: 1000, elapsed time: 1437ms, TPS: 695.8942
 ```
+
+Testing with 1000 numUpdateRequest and 2 maxProcess
+```
+$ curl -kv http://127.0.0.1:8080/replace-with-version/v.1
+*   Trying 127.0.0.1:8080...
+* Connected to 127.0.0.1 (127.0.0.1) port 8080
+> GET /replace-with-version/v.1 HTTP/1.1
+> Host: 127.0.0.1:8080
+> User-Agent: curl/8.6.0
+> Accept: */*
+>
+< HTTP/1.1 200
+< Content-Type: text/plain;charset=UTF-8
+< Content-Length: 90
+< Date: Wed, 17 Jul 2024 05:59:08 GMT
+<
+* Connection #0 to host 127.0.0.1 left intact
+Method:replaceWithVersion, Thread: 2, Total Row: 1000, elapsed time: 2017ms, TPS: 495.7858
+```
+
+
+Testing with 1000 numUpdateRequest and 5 maxProcess
+```
+$ curl -kv http://127.0.0.1:8080/replace-with-version/v.1
+*   Trying 127.0.0.1:8080...
+* Connected to 127.0.0.1 (127.0.0.1) port 8080
+> GET /replace-with-version/v.1 HTTP/1.1
+> Host: 127.0.0.1:8080
+> User-Agent: curl/8.6.0
+> Accept: */*
+>
+< HTTP/1.1 200
+< Content-Type: text/plain;charset=UTF-8
+< Content-Length: 90
+< Date: Wed, 17 Jul 2024 06:02:30 GMT
+<
+* Connection #0 to host 127.0.0.1 left intact
+Method:replaceWithVersion, Thread: 5, Total Row: 1000, elapsed time: 3635ms, TPS: 275.1032
+```
+
+## Conclusion
+Increasing number of threads, gives a negative impact to `replace-with-version` TPS. 
