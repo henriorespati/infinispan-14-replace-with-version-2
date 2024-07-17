@@ -1,5 +1,10 @@
 # Replace With Version on Infinispan 14
 
+## How to Run
+```
+$ java -Xmx4G -Xms4G -XX:+UseShenandoahGC -jar target/infinispan-14-replace-with-version-2-1.0-SNAPSHOT.jar
+```
+
 ## Logs
 ```
 10-07-2024 16:31:36 [pool-1-thread-1] INFO  com.edw.helper.GenerateCacheHelper.lambda$generate$0 - success processing 391dbcf1-18d7-4037-9ce4-21a435bd3cb3 for 0
