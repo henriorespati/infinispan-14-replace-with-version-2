@@ -36,16 +36,15 @@ public class LatestController {
 
     private String account;
 
-    @PostConstruct
-    public void prepareData() {
-        account = UUID.randomUUID().toString();
-    }
-
     @GetMapping("/replace-with-version/v.3")
     public String updateData(@RequestParam(defaultValue = "1", required = false) Integer maxProcess,
                              @RequestParam(defaultValue = "1000", required = false) Integer numUpdateRequest) throws InterruptedException {
 
         long oldTime = System.currentTimeMillis();
+
+        // generate account number
+        account = UUID.randomUUID().toString();
+
         for (int i = 0; i < numUpdateRequest; i++) {
             updateData(maxProcess);
         }

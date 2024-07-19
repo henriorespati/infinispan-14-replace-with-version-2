@@ -115,3 +115,16 @@ $  curl -kv "http://127.0.0.1:8080/replace-with-version/v.3?maxProcess=1&numUpda
 * Connection #0 to host 127.0.0.1 left intact
 done in 6428 ms
 ```
+
+## Conclusion
+
+| cycle | Thread Num | Data | ms       |
+|-------|------------|------|----------|
+| 1     | 1          | 1000 | 3028     |
+| 2     | 1          | 1000 | 2465     |
+| 3     | 2          | 1000 | 3668     |
+| 4     | 2          | 1000 | 5077     |
+| 5     | 5          | 1000 | 6389         |
+| 6     | 5          | 1000 | 3526 |
+| 7     | 10         | 1000 | 4762 |
+| 8     | 10         | 1000 | 6444 |
