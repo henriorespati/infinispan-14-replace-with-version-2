@@ -6,6 +6,18 @@ import org.infinispan.commons.marshall.ProtoStreamMarshaller;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+@Value( "${host}" )
+private String host;
+
+@Value( "${port}" )
+private String port;
+
+@Value( "${username}" )
+private String username;
+
+@Value( "${password}" )
+private String password;
+
 /**
  * <pre>
  *  com.edw.config.InfinispanConfiguration
@@ -20,8 +32,8 @@ public class InfinispanConfiguration {
     public RemoteCacheManager remoteCacheManager() {
         return new RemoteCacheManager(
                 new org.infinispan.client.hotrod.configuration.ConfigurationBuilder()
-                        .addServers("127.0.0.1:11222")
-                        .security().authentication().username("admin").password("password")
+                        .addServer().host(host).port(port)
+                        .security().authentication().username(username).password(password)
                         .clientIntelligence(ClientIntelligence.HASH_DISTRIBUTION_AWARE)
                         .marshaller(ProtoStreamMarshaller.class)
                         .build());
