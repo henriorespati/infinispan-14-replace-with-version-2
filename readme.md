@@ -93,3 +93,25 @@ Method:replaceWithVersion, Thread: 5, Total Row: 1000, elapsed time: 3635ms, TPS
 | 8     | 10         | 1000 | 304.6923 |
 
 Increasing number of threads, gives a negative impact to `replace-with-version` TPS. 
+
+## Latest Controller
+
+Testing with 1 maxProcess and 1000 numUpdateRequest
+
+```
+$  curl -kv "http://127.0.0.1:8080/replace-with-version/v.3?maxProcess=1&numUpdateRequest=1000"
+*   Trying 127.0.0.1:8080...
+* Connected to 127.0.0.1 (127.0.0.1) port 8080
+> GET /replace-with-version/v.3?maxProcess=1&numUpdateRequest=1000 HTTP/1.1
+> Host: 127.0.0.1:8080
+> User-Agent: curl/8.6.0
+> Accept: */*
+>
+< HTTP/1.1 200
+< Content-Type: text/plain;charset=UTF-8
+< Content-Length: 15
+< Date: Fri, 19 Jul 2024 12:46:05 GMT
+<
+* Connection #0 to host 127.0.0.1 left intact
+done in 6428 ms
+```

@@ -34,13 +34,11 @@ public class LatestController {
 
     private Logger log = LoggerFactory.getLogger(this.getClass());
 
-    private String debitAccount;
-    private String creditAccount;
+    private String account;
 
     @PostConstruct
     public void prepareData() {
-        debitAccount = UUID.randomUUID().toString();
-        creditAccount = UUID.randomUUID().toString();
+        account = UUID.randomUUID().toString();
     }
 
     @GetMapping("/replace-with-version/v.3")
@@ -54,7 +52,7 @@ public class LatestController {
 
         log.info("-========- done in {} ms", System.currentTimeMillis() - oldTime);
 
-        return String.format("done in %s ms", System.currentTimeMillis() - oldTime);
+        return String.format("done in %s ms \n", System.currentTimeMillis() - oldTime);
     }
 
     private List<LinkedHashMap<String, Object>> updateData(Integer maxProcess) throws InterruptedException {
@@ -66,8 +64,8 @@ public class LatestController {
         List<LinkedHashMap<String, Object>> listResultData = new ArrayList<>();
 
         List<Future<LinkedHashMap<String, Object>>> futures = new ArrayList<>();
-        DebitBalance debitBalance = new DebitBalance(debitAccount, balanceCache.getCache("balance"));
-        CreditBalance creditBalance = new CreditBalance(creditAccount, balanceCache.getCache("balance"));
+        DebitBalance debitBalance = new DebitBalance(account, balanceCache.getCache("balance"));
+        CreditBalance creditBalance = new CreditBalance(account, balanceCache.getCache("balance"));
 
         futures.add(executor.submit(debitBalance));
         futures.add(executor.submit(creditBalance));
