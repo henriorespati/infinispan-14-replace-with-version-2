@@ -6,18 +6,6 @@ import org.infinispan.commons.marshall.ProtoStreamMarshaller;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-@Value( "${host}" )
-private String host;
-
-@Value( "${port}" )
-private String port;
-
-@Value( "${username}" )
-private String username;
-
-@Value( "${password}" )
-private String password;
-
 /**
  * <pre>
  *  com.edw.config.InfinispanConfiguration
@@ -28,6 +16,19 @@ private String password;
  */
 @Configuration
 public class InfinispanConfiguration {
+
+    @Value( "${host}" )
+    private String host;
+    
+    @Value( "${port}" )
+    private String port;
+    
+    @Value( "${username}" )
+    private String username;
+    
+    @Value( "${password}" )
+    private String password;
+    
     @Bean
     public RemoteCacheManager remoteCacheManager() {
         return new RemoteCacheManager(
