@@ -22,7 +22,7 @@ public class InfinispanConfiguration {
     private String host;
     
     @Value( "${port}" )
-    private String port;
+    private int port;
     
     @Value( "${username}" )
     private String username;
