@@ -81,13 +81,13 @@ public class LatestController {
         }
 
         // print only if more than 10ms
-        if (System.currentTimeMillis() - oldTime > 10) {
+        // if (System.currentTimeMillis() - oldTime > 10) {
             log.info("[{}.{}.{}]: JDG, idPos : {}[{},{}] balance update time is {} ms = {} + {} , debet loop count {}, credit loop count {}",
                     debitBalance.threadName, instructionType, Math.max(executor.getCorePoolSize(), executor.getCorePoolSize()),
                     "0", "0", "0",
                     System.currentTimeMillis() - oldTime, debitBalance.time, creditBalance.time,
                     debitBalance.count, creditBalance.count);
-        }
+        // }
 
         awaitTerminationAfterShutdown(executor);
         return listResultData;
