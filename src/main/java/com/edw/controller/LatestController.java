@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.lang.InterruptedException;
+import java.lang.Thread;
 import java.math.BigDecimal;
 import java.util.*;
 import java.util.concurrent.Callable;
@@ -86,7 +88,20 @@ public class LatestController {
                     debitBalance.count, creditBalance.count);
         }
 
+        awaitTerminationAfterShutdown(executor);
         return listResultData;
+    }
+
+    public void awaitTerminationAfterShutdown(ThreadPoolExecutor threadPool) {
+        threadPool.shutdown();
+        try {
+            if (!threadPool.awaitTermination(10, TimeUnit.SECONDS)) {
+                threadPool.shutdownNow();
+            }
+        } catch (InterruptedException ex) {
+            threadPool.shutdownNow();
+            Thread.currentThread().interrupt();
+        }
     }
 
     private class DebitBalance implements Callable<LinkedHashMap<String, Object>> {
